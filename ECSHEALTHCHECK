@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# Set AWS credentials
+export AWS_ACCESS_KEY_ID="AKIA6GBMH3OORQJEC7GA"
+export AWS_SECRET_ACCESS_KEY="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"
+export AWS_DEFAULT_REGION="ap-south-1"
+
+# Set variables
+CLUSTER_NAME="test-cluster"
+SERVICE_NAME="my-ecs-service"
+
+
+# Get current desired task count
+DESIRED_COUNT=$(aws ecs describe-services --cluster $CLUSTER_NAME --services $SERVICE_NAME --query 'services[0].desiredCount' --output text)
+
+echo $DESIRED_COUNT
+# Get running tasks count
+RUNNING_TASKS=$(aws ecs list-tasks --cluster $CLUSTER_NAME --service-name $SERVICE_NAME --query 'taskArns' --output text | wc -w)
+
+echo $RUNNING_TASKS
+# Check if running tasks count matches desired count
+if [ "$DESIRED_COUNT" -eq "$RUNNING_TASKS" ]; then
+    echo "Health check passed: All $DESIRED_COUNT tasks are running."
+    exit 0
+else
+    echo "Health check failed: Only $RUNNING_TASKS out of $DESIRED_COUNT tasks are running."
+    exit 1
+fi
