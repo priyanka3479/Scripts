@@ -1,0 +1,48 @@
+find 15 days older file commond:
+
+find /path/to/search -type f -mtime +15
+
+find ~/Downloads -type f -mtime +15
+find . -type f -mtime +15
+ find /c/users/Z004MBAH/ -type f -mtime +15
+
+
+remove the file within the dates"
+find /home/my_folder -type f -mtime +5 | xargs rm
+
+
+
+
+sed commonds:
+sed -i 's/old_pattern/new_pattern/g' file_name
+
+
+
+list the OS details on Linux Vm and list all users::
+
+hostnamectl
+uname -r
+lsb_release -a
+ uname -a
+
+
+
+date set:
+
+sudo date MMDDhhmm[[CC]YY][.ss]
+sudo date 032010302024
+bash -c 'date MMDDhhmm[[CC]YY][.ss]'
+date -s=”Date and time information”
+date -s “2 June 2023 14:05:00”
+date -s "2024-03-20 15:30:00"
+
+
+"C:\aws resorces"
+
+foobarbazfoobarbaz
+foo bar baz foo bar baz
+Foo Bar Baz Foo Bar Baz
+FOO BAR BAZ FOO BAR BAZ
+/foo/bar/baz /foo/bar/baz
+
+sed -i 's/\bbar\b/linux/gI' example.txt:global sustrings

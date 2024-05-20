@@ -1,0 +1,32 @@
+#!/bin/bash
+#define the repository URL
+REPO_URL="git@code.siemens.com:blrise/productive/nextwork/testpriyanka.git"
+
+#clone the repository
+git clone $REPO_URL
+
+#chnage directory in repository
+cd testpriyanka
+
+#List all branches in the repository
+branches=$(git branch -a | grep -v -e "remotes/origin/HEAD" -e "remotes/origin/testtt-1" | sed 's/remotes\/origin\///')
+
+# Define the wildcard pattern for branches want to delete
+pattern="testtt-*"
+
+#Loop through branches and delete if matching the pattern
+for branch in $branches
+do
+        if [[ $branch == $pattern ]]; then
+                echo "Deleting branch $branch"
+                 git push origin --delete $branch
+        fi
+done
+
+cd ..
+rm -rf testpriyanka
+
+echo "Unwanted branches deleted successfully."
+
+
+

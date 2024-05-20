@@ -1,0 +1,9 @@
+ sed 's/unix/linux/' geekfile.sh : first word will change
+ sed 's/unix/linux/2' geekfile.sh : sec word will change
+ sed 's/unix/linux/g' geekfile.sh : everywhere it change
+ sed 's/unix/linux/3g' geekfile.sh : only 3rd line change
+ sed '2 s/unix/linux/' geekfile.sh :2 line chnage
+ sed '4 s/unix/linux/' geekfile.sh : 4 line is change
+
+
+"C:\testpriyanka"

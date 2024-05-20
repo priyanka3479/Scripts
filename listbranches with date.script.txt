@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# List of repository URLs or paths
+repos=(
+  "git@code.siemens.com:blrise/productive/nextwork/testpriyanka.git"
+)
+
+# Add more repositories as needed
+
+for repo in "${repos[@]}"; do
+  # Clone the repository
+  repo_name=$(basename "$repo" .git)
+  git clone "$repo"
+  
+  # Enter the repository directory
+  cd "$repo_name" || exit
+
+  # List branches with commit dates
+  branches=$(git for-each-ref --sort='-committerdate' --format '%(refname:short) %(committerdate:relative)' refs/heads/ refs/remotes/origin/)
+  echo "List of branches with commit dates for repository: $repo"
+  echo "$branches"
+
+  # Return to the original directory
+  cd ..
+
+  # Clean up by removing the cloned repository
+  rm -rf "$repo_name"
+done
